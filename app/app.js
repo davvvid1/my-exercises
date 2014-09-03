@@ -6,12 +6,27 @@
     module.config(function ($provide, $routeProvider)
     {
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
+        $routeProvider.when('/', {
+            templateUrl: 'brainCandyList.html',
+            controller: 'BrainCandyListCtrl as brainCandyList'
+        });
+        $routeProvider.when('/edit/:id', {
+            templateUrl: 'brainCandyDetails.html',
+            controller: 'BrainCandyDetailsCtrl as brainCandyDetails'
+        });
+        $routeProvider.when('/new', {
+            templateUrl: 'brainCandyDetails.html',
+            controller: 'BrainCandyDetailsCtrl as brainCandyDetails'
+        });
 
     });
+
 
     module.run(function ($httpBackend)
     {
         var sequence = 1;
+
+
         var candies = {};
         [
             {   id: sequence++,
@@ -46,7 +61,7 @@
             return [200, candies];
         });
 
-        $httpBackend.whencandy(/\/api\/candy/).respond(function (method, url, candyData)
+        $httpBackend.whenPOST(/\/api\/candy/).respond(function (method, url, candyData)
         {
             candyData = JSON.parse(candyData);
 
@@ -60,6 +75,7 @@
 
             return [200, candyData];
         });
+
 
         $httpBackend.whenDELETE(/\/api\/candy\/(\d+)/).respond(function (method, url)
         {

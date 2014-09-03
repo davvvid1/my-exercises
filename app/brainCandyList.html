@@ -1,0 +1,22 @@
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Factory</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="row in brainCandyList.posts">
+
+        <th>{{row.id}}</th>
+        <th>{{row.name}}</th>
+        <th>{{row.factory}}</th>
+        <th><a href="/#/edit/{{row.id}}" class="btn btn-primary btn-sm">Edit</a></th>
+
+    </tr>
+    <tr>
+        <th><a href="/#/new" class="btn btn-primary btn-sm">New</a></th>
+    </tr>
+    </tbody>
+</table>

@@ -3,10 +3,23 @@
 
     function CandyDAO($resource) {
         var api = $resource('/api/candy/:a', null, {
-
+            query: {
+                isArray: false
+            }
         });
         return {
-
+            query: function () {
+                return api.query({}).$promise;
+            },
+            get: function (id) {
+                return api.get({a: id}).$promise;
+            },
+            save: function (data) {
+                return api.save(data).$promise;
+            },
+            delete: function (id) {
+                return api.delete({a: id}).$promise;
+            }
         };
     }
 
