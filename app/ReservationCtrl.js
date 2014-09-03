@@ -3,10 +3,22 @@
     function ReservationCtrl($filter,$scope) {
         var ctrl = this;
 
+        $scope.$watch("reservation.list.firstName + reservation.list.lastName + reservation.list.email + reservation.list.email + reservation.list.selectRefreshment + reservation.list.selectZone + reservation.list.vip + reservation.list.date + reservation.list.comments", function () {
+            console.log('raz');
+            ctrl.save();
+        });
+        $scope.$watch("reservation.list.selectZone", function () {
+            console.log('raz');
+            ctrl.save();
+        });
+
         ctrl.list = {
+
             selectRefreshment: {value: ''},
             selectZone: {value: ''}
+
         };
+
 
         ctrl.refreshments = [
             {value: 1, status: 'yes'},
@@ -40,7 +52,10 @@
                 comments: ctrl.list.comments
             };
         }
+
+
     }
+
 
     var module = angular.module('exerciseApp', ["xeditable"]);
     module.controller('ReservationCtrl', ['$filter','$scope', ReservationCtrl]);

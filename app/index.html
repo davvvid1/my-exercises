@@ -18,8 +18,7 @@
         <label class="col-sm-2 control-label">First Name:</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="firstname" placeholder="First Name"
-                   ng-model="reservation.list.firstName">
+            <a editable-text="reservation.list.firstName">{{reservation.list.firstName || 'Enter your first name'}}</a>
         </div>
     </div>
 
@@ -27,64 +26,74 @@
         <label class="col-sm-2 control-label">Last Name:</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="lastname" placeholder="Last Name"
-                   ng-model="reservation.list.lastName">
+            <a editable-text="reservation.list.lastName" id="lastName">{{reservation.list.lastName || 'Enter your last
+                name'}}</a>
         </div>
     </div>
     <div class="row">
         <label class="col-sm-2 control-label">E-mail:</label>
 
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" placeholder="Email" ng-model="reservation.list.email">
+            <a editable-text="reservation.list.email" id="email">{{reservation.list.email || 'Enter your email'}}</a>
         </div>
     </div>
     <div class="row">
+
         <label class="col-sm-2 control-label">Refreshments:</label>
 
         <div class="col-sm-10">
-            <label class="radio-inline" ng-repeat="refreshment in reservation.refreshments"
-                   for="refreshment_{{refreshment}}">
-                <input type="radio" name="refreshments" id="refreshment_{{refreshment}}" ng-value="refreshment.status"
-                       ng-model="reservation.list.selectRefreshment">{{refreshment.status}}
-            </label>
+            <a href="#" editable-radiolist="reservation.list.selectRefreshment"
+               e-ng-options="s.value as s.status for s in reservation.refreshments">
+
+                {{ 1==reservation.list.selectRefreshment && 'yes' || 2==reservation.list.selectRefreshment && 'no' ||
+                'Select refreshment' }}
+            </a>
+
+
         </div>
     </div>
     <div class="row">
         <label for="zone" class="col-sm-2 control-label">Zone:</label>
 
         <div class="col-sm-10" id="zone">
-            <select class="form-control" ng-model="reservation.list.selectZone"
-                    ng-options="zone.color for zone in reservation.zones ">
-            </select>
+            <a href="#" editable-select="reservation.list.selectZone" e-ng-options="s.color for s in reservation.zones">{{reservation.list.selectZone.color
+                || 'Change zone'}}</a>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
+            <div class="checkbox" style="padding-left:0px;">
                 <label>
-                    <input type="checkbox" ng-model="reservation.list.vip"> VIP
+                    <a href="#" editable-checkbox="reservation.list.vip" e-title="Are you VIP?">{{ reservation.list.vip
+                        && "I am VIP" || "I am not VIP" }}</a>
+
+
                 </label>
             </div>
         </div>
     </div>
     <div class="row">
-        <label for="date" class="col-sm-2 control-label">Date:</label>
+        <label class="col-sm-2 control-label">Date:</label>
 
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="date" placeholder="Date" ng-model="reservation.list.date">
+
+            <a href="#" editable-date="reservation.list.date" e-datepicker-popup="dd-MMMM-yyyy">
+                {{ (reservation.list.date | date:"dd/MM/yyyy") || 'Choose date' }}
+            </a>
         </div>
     </div>
     <div class="row">
-        <label for="comments" class="col-sm-2 control-label">Comments:</label>
+        <label class="col-sm-2 control-label">Comments:</label>
 
         <div class="col-sm-10">
-            <textarea class="form-control" id="comments" placeholder="Comments"
-                      ng-model="reservation.list.comments"></textarea>
+            <a href="#" editable-textarea="reservation.list.comments" e-rows="7" e-cols="40">
+                {{ reservation.list.comments || 'no description' }}
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-default" ng-click="reservation.save()">Save</button>
+            <!--<button class="btn btn-default" ng-click="reservation.save()">Save</button>-->
             <button type="submit" class="btn btn-default" ng-click="reservation.showSummary()">
                 <span ng-if="!reservation.isSummary">Show data</span>
                 <span ng-if="reservation.isSummary">Hide data</span>
