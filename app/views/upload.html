@@ -1,5 +1,6 @@
-<div>
-    <h3>Files upload component</h3>
+<div flow-init="{target: '/backend'}" flow-files-submitted="upload.startUpload($flow, $flow.files)"
+     flow-file-success="upload.fileSuccess($flow.files, $message)" flow-complete="upload.flowComplete()">
+<h3>Files upload component</h3>
     <div class="form-group">
         <button class="btn btn-primary" flow-btn>Select file</button>
     </div>
