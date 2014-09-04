@@ -1,14 +1,24 @@
 (function () {
     'use strict';
-    function TranslateCtrl() {
+    function TranslateCtrl(gettext, gettextCatalog) {
         var ctrl = this;
+
+
+        var pl = gettext('polski');
+        var en = gettext('angielski');
+        var de = gettext('niemiecki');
         ctrl.languages = [
-            {value: 'pl', name: 'polski'},
-            {value: 'en', name: 'angielski'},
-            {value: 'de', name: 'niemiecki'}
+            {value: 'pl', name: pl},
+            {value: 'en', name: en},
+            {value: 'de', name: de}
         ];
 
+        this.changeLanguage = function (language) {
+            gettextCatalog.setCurrentLanguage(language);
+        }
+
     }
-    var module = angular.module('exerciseApp',[]);
-    module.controller('TranslateCtrl', [TranslateCtrl]);
+
+    var module = angular.module('exerciseApp', ['gettext']);
+    module.controller('TranslateCtrl', ['gettext', 'gettextCatalog', TranslateCtrl]);
 })();
