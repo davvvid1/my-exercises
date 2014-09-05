@@ -3,7 +3,7 @@
     function BrainCandyListCtrl(CandyDAO) {
         var ctrl = this;
         CandyDAO.query().then(function (data) {
-            ctrl.posts = data;
+            ctrl.list = data;
         });
     }
 

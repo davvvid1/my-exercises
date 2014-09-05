@@ -8,11 +8,9 @@
 
 
         ctrl.newCandy = function () {
-            console.log(ctrl.details);
             CandyDAO.save(ctrl.details);
         }
         ctrl.delCandy = function () {
-            console.log($routeParams.id);
             CandyDAO.delete($routeParams.id);
         }
 
