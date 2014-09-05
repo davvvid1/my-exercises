@@ -22,8 +22,8 @@
         "url": "https://github.com/aniaw/angular-exercises.git"
     },
     "scripts": {
-        "start": "node_modules/karma/bin/karma start test/karma.conf.js",
-        "test": "node_modules/karma/bin/karma start test/karma.conf.js --singleRun true"
+        "start": "node_modules/karma/bin/karma start test/karma.conf.js.js",
+        "test": "node_modules/karma/bin/karma start test/karma.conf.js.js --singleRun true"
     }
 }
 
