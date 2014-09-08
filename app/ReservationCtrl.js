@@ -1,21 +1,19 @@
 (function () {
     'use strict';
-    function ReservationCtrl($filter,$scope) {
+    function ReservationCtrl($scope) {
         var ctrl = this;
 
-        $scope.$watch("reservation.list.firstName + reservation.list.lastName + reservation.list.email + reservation.list.email + reservation.list.selectRefreshment + reservation.list.selectZone + reservation.list.vip + reservation.list.date + reservation.list.comments", function () {
-            console.log('raz');
+        $scope.$watch(function () {
+            return ctrl.list;
+        }, function () {
             ctrl.save();
-        });
-        $scope.$watch("reservation.list.selectZone", function () {
-            console.log('raz');
-            ctrl.save();
-        });
+
+        }, true);
 
         ctrl.list = {
 
-            selectRefreshment: {value: ''},
-            selectZone: {value: ''}
+            selectRefreshment: '',
+            selectZone: ''
 
         };
 
@@ -58,5 +56,5 @@
 
 
     var module = angular.module('exerciseApp', ["xeditable"]);
-    module.controller('ReservationCtrl', ['$filter','$scope', ReservationCtrl]);
+    module.controller('ReservationCtrl', ['$scope', ReservationCtrl]);
 })();
