@@ -1,7 +1,8 @@
 <h3>Select your favorites artists</h3>
 <div class="form-group">
-    <input type="hidden"
+    <input id="sel" type="hidden"
            style="min-width:80%"
-           ng-model="ngselect2.artistModel"
+           ng-model="ngselect2.query"
            ui-select2="ngselect2.select2options"/>
 </div>
+{{ngselect2.query}}
