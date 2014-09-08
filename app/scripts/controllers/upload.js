@@ -1,41 +1,22 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name ngflowApp.controller:NgflowCtrl
- * @description
- * # NgflowCtrl
- * Controller of the ngflowApp
- */
-angular.module('ngflowApp').controller('uploadCtrl', function ($scope) {
+angular.module('ngflowApp').controller('uploadCtrl', function () {
 
     this.flowCompleteFlag = false;
 
     this.image = undefined;
 
-    this.startUpload = function(flow,files){
-	// write function body
-
-        console.log('startUpload');
-
+    this.startUpload = function (flow, files) {
         flow.upload();
+    };
 
-        console.log(flow);
-        console.log(files);
-    }
-
-    this.fileSuccess = function(file,message){
-	// write function body
-        console.log('fileSuccess');
-        this.image = message;
-        console.log(file);
-        console.log(message);
+    this.fileSuccess = function (file, message) {
         this.image = JSON.parse(message);
-    }
+    };
 
-    this.flowComplete=function(){
+    this.flowComplete = function () {
         this.flowCompleteFlag = true;
-        console.log('flowComplete');
-    }
+    };
 
 });
+
