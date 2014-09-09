@@ -52,7 +52,34 @@
                 products[value.id] = value;
                 return true;
             });
+        $httpBackend.whenGET(/.*\.html/).passThrough();
+        $httpBackend.whenGET('/api/product').respond(products);
 
+        $httpBackend.whenGET(/\/api\/product\/(\d+)/).respond(function (method, url) {
+            var match = /\/api\/product\/(\d+)/.exec(url);
+            console.log(match);
+            if (match) {
+                var id = parseInt(match[1], 10);
+                console.log(products[id]);
+                return [200, products[id]];
+            }
+            return [404];
+        });
 
+        $httpBackend.whenPUT('/api/product/new').respond(function (method, url, candyData) {
+            console.log('metoda: ' + method + '\nurl: ' + url + '\ncandy: ' + candyData);
+            candyData = JSON.parse(candyData);
+            if (products[candyData.id]) {
+                products[candyData.id].product = candyData.product;
+                products[candyData.id].price = candyData.price;
+            } else {
+                candyData.id = sequence++;
+                products[candyData.id] = candyData;
+            }
+
+            return [200, candyData];
+        });
+
+        // PUT /api/product/new
     });
 })();
