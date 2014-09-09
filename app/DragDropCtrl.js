@@ -15,6 +15,7 @@
         ];
 
     }
-    var module = angular.module('exerciseApp',[]);
+
+    var module = angular.module('exerciseApp', ['ngDragDrop']);
     module.controller('DragDropCtrl', [DragDropCtrl]);
 })();
