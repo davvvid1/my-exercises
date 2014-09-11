@@ -57,7 +57,6 @@
 
         $httpBackend.whenGET(/\/api\/product\/(\d+)/).respond(function (method, url) {
             var match = /\/api\/product\/(\d+)/.exec(url);
-            console.log(match);
             if (match) {
                 var id = parseInt(match[1], 10);
                 console.log(products[id]);
@@ -67,7 +66,6 @@
         });
 
         $httpBackend.whenPUT('/api/product/new').respond(function (method, url, candyData) {
-            console.log('metoda: ' + method + '\nurl: ' + url + '\ncandy: ' + candyData);
             candyData = JSON.parse(candyData);
             if (products[candyData.id]) {
                 products[candyData.id].product = candyData.product;
@@ -80,6 +78,28 @@
             return [200, candyData];
         });
 
-        // PUT /api/product/new
-    });
+        $httpBackend.whenPOST('/api/product').respond(function (method, url, candyData) {
+            candyData = JSON.parse(candyData);
+            if (products[candyData.id]) {
+                products[candyData.id].product = candyData.product;
+                products[candyData.id].price = candyData.price;
+                return [200, candyData];
+            }
+            return [404];
+
+        });
+        $httpBackend.whenDELETE(/\/api\/product\/(\d+)/).respond(function (method, url) {
+
+            var match = /\/api\/product\/(\d+)/.exec(url);
+            if (match) {
+                var id = parseInt(match[1], 10);
+                delete products[id];
+                return [200];
+            }
+            return [404];
+        });
+
+    })
+
 })();
+
